@@ -4,16 +4,20 @@
 
 <template>
 <div class="headerHome">
-    <div>
+    <div id="info">
         <p>
             Encontre, reserve e pronto! Agora é só segui até o estacionamento escolhido.
         </p>
     </div>
-    <div>
-        <h4>baixo nosso APP</h4>
-        <a href="https://play.google.com/store/games"><button type="button"><img src="../assets/img/play store.png" alt="play store"></button></a>
-        <a href="https://www.apple.com/br/app-store/"><button type="button"><img src="../assets/img/icons8-apple-logo-50.png" alt="apple"></button></a>
-        <p>IOS e Android</p>
+    <div id="logo">
+        <h4>Baixe nosso APP</h4><br>
+        <section>
+            <section id="imagens">
+                <a href="https://play.google.com/store/apps"><img src="../assets/img/play store.png" alt="google play"></a>
+                <a href="https://www.apple.com/br/app-store/"><img src="../assets/img/icons8-apple-logo-50.png" alt="apple"></a>
+            </section>
+            <p>IOS e Android</p>
+        </section>
     </div>
 </div>
 </template>

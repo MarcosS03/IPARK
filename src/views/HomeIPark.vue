@@ -6,36 +6,33 @@ import footerHome from '../components/FooterHome.vue';
 </script>
 
 <template>
-<header>
 
-<headerHome></headerHome>
-
-</header>
+<headerHome/>
 
 <body>
         
    <div class="cabecalho2">
       <div class="logocarro">
-         <img src="../assets/img/carro-estacionado.png" alt="logo carro">
+         <img src="../assets/img/carro-estacionado.png" alt="logo IPark">
          <h2>I PARK</h2>
       </div>
-      <div>
+      <div id="link-login">
          <a href="./Login.vue">Crie a sua conta/Entrar</a>
          <img src="../assets/img/icons8-usuário-30.png" alt="logo usuario">
       </div>
    </div>
-   <section class="mapaGoogle">
-      <div id="mapa">
-         <a href="#mapa"> Encontre</a>
-         <a href="./suporte">suporte</a>
+   <div id="mapa">
+      <section>
+         <a href="#mapa">Encontre</a>
+         <a href="./suporte">Suporte</a>
          <a href="./sobre">Sobre</a>
+      </section>
 
-         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3168.602359423974!2d-35.59385254595784!3d-8.685599161551972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1732195137563!5m2!1spt-BR!2sbr" 
-         width="1253" height="896" style="border:0;" allowfullscreen="" 
-         loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-         </iframe>
-      </div>
-   </section>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3168.602359423974!2d-35.59385254595784!3d-8.685599161551972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1spt-BR!2sbr!4v1732195137563!5m2!1spt-BR!2sbr" 
+      wistyle="border:1px;" allowfullscreen="" 
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+   </div>
 
    <section class="appCelular">
       <div class="app1">
