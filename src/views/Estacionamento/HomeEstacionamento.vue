@@ -79,85 +79,89 @@ import HeaderGeral from '@/components/HeaderGeral.vue';
 </section>
 
 <section class="gestaoVaga">
+    <a href="../Estacionamento/LiberarVeiculo.vue"><button type="button" class="botaoVaga">    
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button></a>
 
-    <div class="vaga">
-        
+    <button type="button" class="botaoVaga">       
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        
+    </button>
+
+    <button type="button" class="botaoVaga">
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        
+    </button>
+
+    <button type="button" class="botaoVaga">  
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        
+    </button>
+
+    <button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button>
+
+    <button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button>
+
+    <button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button>
+
+    <button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button>
+
+    <button type="button" class="botaoVaga">
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        
+    </button>
+
+    <button type="button" class="botaoVaga">
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
-        
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
+    </button>
+
+    <button type="button" class="botaoVaga">
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </div>
-    <div class="vaga">
+    </button>
+
+    <button type="button" class="botaoVaga">
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </div>
+    </button>
     
 
 </section>
@@ -191,7 +195,8 @@ body{
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    margin: 10%;
+
+    margin: 10% 0 5% 0;
     justify-content: center;
     
     
@@ -213,7 +218,7 @@ body{
     background-color: rgba(217, 217, 217, 1);
     margin: 0px 10px 10px 10px;
     border-radius: 5px;
-    
+    position: relative;
     
     
 
@@ -243,7 +248,10 @@ body{
     cursor: pointer;
     text-align: center;
     position: relative;
-    bottom: 0px;   
+    bottom: 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;   
     
 }
 .dashboard h2{
@@ -261,32 +269,13 @@ body{
     margin: 0 auto;
     border-radius: 15px;
     margin-top: 5%;
+    margin-bottom: 5%;
     padding: 40px;
     flex-wrap: wrap;
     justify-content: center;
     align-content: baseline;
   
 }
-
-.vaga{
-    width: 151px;
-    height: 96px;
-    background-color: rgba(126, 189, 241, 1);
-    margin: 20px;
-    justify-content: space-between;  
-    border-radius: 5px;
-
-    
-}
-
-.vaga img{
-    float: left;
-    margin-top: 0px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-
 
 .tipoVaga{
     font-size: 12px;
@@ -300,5 +289,30 @@ body{
 }
 .horaEntrada{
     margin-left: 5px;
+}
+
+.botaoVaga{
+    border: none;
+    padding: 0px;
+    width: 151px;
+    height: 96px;
+    background-color: rgba(126, 189, 241, 1);
+    margin: 20px;
+    justify-content: space-between;  
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botaoVaga:hover{
+    background-color: rgb(30, 92, 143);
+
+}
+
+.botaoVaga img{
+    float: left;
+    margin-top: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+    
 }
 </style>

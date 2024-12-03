@@ -1,6 +1,6 @@
 <script setup>
 
-import headerGeral from '../components/HeaderGeral.vue'
+import HeaderGeral from '@/components/HeaderGeral.vue';
 
 </script>
 
@@ -11,7 +11,7 @@ import headerGeral from '../components/HeaderGeral.vue'
 
 <body>
     <h1>Dados  do Estacionamento</h1>
- <form action="">
+ <form action="" class="formularioEstacionamento">
 
     <label for="tipoPessa">TIPO DE PESSOA </label>
     <select name="TipoPessoa" id="tipoPessoa">
@@ -74,5 +74,23 @@ import headerGeral from '../components/HeaderGeral.vue'
 </template>
 
 <style>
+
+body{
+  font-family: 'Inria Sans';font-size: 15px;
+  font-weight: bolder;
+}
+h1{
+  font-size: 40px;
+  margin-left: 5%;
+}
+
+.formularioEstacionamento{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-left: 25%;
+  margin-right: 25%;
+  
+}
 
 </style>
