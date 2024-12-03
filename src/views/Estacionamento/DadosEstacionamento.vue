@@ -5,91 +5,290 @@ import HeaderGeral from '@/components/HeaderGeral.vue';
 </script>
 
 <template>
+ 
 <header>
   <headerGeral></headerGeral>
 </header>
 
 <body>
     <h1>Dados  do Estacionamento</h1>
- <form action="" class="formularioEstacionamento">
 
-    <label for="tipoPessa">TIPO DE PESSOA </label>
-    <select name="TipoPessoa" id="tipoPessoa">
-      <option value="Fisica">Fisica</option>
-      <option value="Juridica">Juridica</option>
-    </select><br>
+  <form>
+   
+    <div class="tipoPFPJ">
+      <label for="tipoPessa">TIPO DE PESSOA </label>
+      <select name="TipoPessoa" id="tipoPessoaEstacionamento">
+        <option value="Fisica">Fisica</option>
+        <option value="Juridica">Juridica</option>
+      </select>
+    </div>
 
-    <label for="CPF_CNPJ">CPF/CNPJ </label>
-    <input id="CPF_CNPJ" type="text" >
-    <button type="button"> Pesquisar CNPJ </button>
+    <div class="CPFCNPJRG">
+      <label for="CPF_CNPJ">CPF/CNPJ </label>
+      <input id="CPF_CNPJ_Estacionamento" type="text" >
+      <button type="button" id="botaopesquisaCNPJ"> Pesquisar CNPJ </button>
 
-    <label for="RG_IE"> RG/IE </label>
-    <input type="text" id="RG_IE">
-    <br>
-    <label for="nomePessoa"> NOME </label>
-    <input type="text" id="nomePessoa"><br>
-
-    <label for="nomeApelidio"> APELIDIO</label>
-    <input type="text" id="nomeApelidio"><br>
-
-    <label for="CEP"> CEP </label>
-    <input type="text" id="CEP">
-    <button type="button"><img src="../assets/img/icons8-pesquisa-50.png" width="21" height="21" alt="lupa"> Pesquisar CEP</button>
-    <br>
-
-    <label for="endereco">ENDEREÇO</label>
-    <input type="text" id="endereco" >
-    <label for="numero"> NUMERO</label>
-    <input type="text" id="numero"><br>
-
-    <label for="complemento">COMPLEMENTO</label>
-    <input type="text" id="complemento">
-    <select  id="estadu_uf">
-      <option value="PE">Pernambuco</option>
-      <option value="AL">Alagoas</option>
-    </select><br>
-
-    <label for="bairro">BAIRRO</label>
-    <input type="text" id="bairro">
-    <label for="cidade">CIDADE</label>
-    <input type="text" id="cidade" placeholder="cod. IBGE">
-    <select id="cidade">
+      <label for="RG_IEEstacionamento"> RG/IE </label>
+      <input type="text" id="RG_IEEstacionamento">
+    </div>
+    <div>
+      <label for="nomePessoaEstacionamento"> RAZÃO SOCIAL </label>
+      <input type="text" id="nomePessoaEstacionamento"><br>
+   </div>
+   <div>
+    <label for="nomeApelidioEstacionamento"> FANTASIA</label>
+    <input type="text" id="nomeApelidioEstacionamento"><br>
+   </div>
+   <div class="cep">
+    <label for="CEPEstacionemento"> CEP </label>
+    <input type="text" id="CEPEstacionemento">
+    <button type="button"><img src="/src/assets/img/icons8-pesquisa-50.png" width="18" height="18" alt="lupa"> Pesquisar CEP</button>
+  </div>
+  <div>
+    <label for="enderecoEstacionamento">ENDEREÇO</label>
+    <input type="text" id="enderecoEstacionamento" >
+    <label for="numeroEstacionamento"> NUMERO</label>
+    <input type="text" id="numeroEstacionamento"><br>
+  </div>
+  <div>
+    <label for="complementoEstacionamento">COMPLEMENTO</label>
+    <input type="text" id="complementoEstacionamento">
+    <label for="estado_ufEstacionamento">UF</label>
+    <select  id="estado_ufEstacionamento">
+      <option value="PE">PE</option>
+      <option value="AL">AL</option>
+    </select>
+  </div>
+  <div>
+    <label for="bairroEstacionamento">BAIRRO</label>
+    <input type="text" id="bairroEstacionamento">
+    <label for="cidadeEstacionamento">CIDADE</label>
+    <input type="text" id="cidadeEstacionamento" placeholder="cod. IBGE">
+    <select id="cidadeEstacionamentoSelect">
       <option value="PALMARES">PALMARES</option>
       <option value="AGUA PRETA">AGUA PRETA</option>
-    </select><br>
+    </select>
+  </div>
+  <div>
+    <label for="emailEstacionamento">EMAIL</label>
+    <input type="email" id="emailEstacionamento">
+  </div>
+  <div>
+    <label for="telefoneEstacionamento">TELEFONE/CELULAR</label>
+    <input type="tel" id="telefoneEstacionamento">
 
-    <label for="telefone">TELEFONE</label>
-    <input type="tel" id="telefone">
-
-    <label for="celular">CELULAR</label>
-    <input type="tel" id="celular">
-
-    <label for="whatsapp">WHATS APP</label>
-    <input type="tel" id="whatsapp">
-
-
-   <input type="submit" value="Salvar">
+    <label for="whatsappEstacionamento">WHATS APP</label>
+    <input type="tel" id="whatsappEstacionamento">
+  </div>
+<div class="botaoEstacionamento">
+  <button type="submit">ALTERAR</button>
+</div>
  </form>
+
 </body>
 </template>
 
 <style>
 
+
 body{
-  font-family: 'Inria Sans';font-size: 15px;
+  font-family: 'Inria Sans';font-size: 12px;
   font-weight: bolder;
+  padding: 0;
+  margin: 0;
 }
 h1{
   font-size: 40px;
   margin-left: 5%;
+  margin-top: 12%;
+  margin-bottom: 7%;
+}
+.pai{
+  height: 10em;
+  position: relative;
+}
+form{
+  
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    justify-content: space-around;
+    
 }
 
-.formularioEstacionamento{
+#tipoPessoaEstacionamento{
+  
+  width: 200px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+#CPF_CNPJ_Estacionamento{
+  width: 200px;
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+
+}
+#RG_IEEstacionamento{
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#botaopesquisaCNPJ{
+  width: 140px;
+  background-color: rgba(102, 207, 252, 1);
+  margin: 0px 5px 5px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  
+}
+
+#nomePessoaEstacionamento{
+  width:540px;
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#nomeApelidioEstacionamento{
+  width: 567px;
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+
+.cep button{
+  width: 140px;
+  text-align: center;
+  background-color: rgba(102, 207, 252, 1);
+  margin: 0px 5px 5px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+}
+.cep img{
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px
+  
+}
+#CEPEstacionemento{
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+
+#enderecoEstacionamento{
+width: 390px;
+margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#numeroEstacionamento{
+ width: 110px;
+ margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#complementoEstacionamento{
+  width: 430px;
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#estado_ufEstacionamento{
+  width: 80px;
+  text-align: center;
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#bairroEstacionamento{
+  width: 250px;
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#cidadeEstacionamento{
+width: 100px;
+text-align: center;
+margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#cidadeEstacionamentoSelect{
+width: 169px;
+margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#emailEstacionamento{
+width: 584px;
+margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#telefoneEstacionamento{
+  width: 300px;
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+#whatsappEstacionamento{
+  width: 145px;
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
+}
+.botaoEstacionamento button{
+width: 150px;
+background-color: rgba(102, 207, 252, 1);
+margin: 0px 5px 5px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+}
+.botaoEstacionamento{
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-left: 25%;
-  margin-right: 25%;
+  justify-content: end;
+  margin-bottom: 10%;
+  
   
 }
 
