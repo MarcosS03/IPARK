@@ -7,8 +7,8 @@
     <header>
 <div class="headergeral">
     <div class="logo">
-        <p><img src="../assets/img/carro-estacionado.png" alt="logo carro" width="95" height="67">
-       I PARK</p>
+        <img src="../assets/img/carro-estacionado.png" alt="logo carro" width="95" height="67">
+        <p>I PARK</p>
     </div>
     <div class="iconeUsuario">
       
@@ -33,10 +33,13 @@ header{
     flex-direction: row;
     justify-content:space-between;
     background-color:rgb(211, 210, 210, 0.15);
-    
-    box-shadow: 0 0 1.5px;
     width: 100%;
     height: 94px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 20px 0px #b3b2b3;
+   
     
     
 }
@@ -45,16 +48,24 @@ header{
    
     
 }
+.logo{
+    display: flex;
+    align-items: center;
+}
 
 .logo  p{
     font-size: 40px;
     font-weight: bolder;
     display: flex;
-    align-content: center;
+    align-items: center;
+   
      
 }
 .logo img{
-    align-self: center;
+    float: left;
+    margin-left: 14px;
+    margin-right: 14px;
+    
 }
 
 .buttonSemIcone{
