@@ -88,9 +88,17 @@ import HeaderGeral from '@/components/HeaderGeral.vue';
 </body>
 </template>
 
-<style>
+<style scoped>
 
+button, input, select{
+  
+  margin: 0px 5px 5px;
+  height: 25px;
+  background-color: rgba(217, 217, 217, 1);
+  border: none;
+  border-radius: 5px;
 
+}
 body{
   font-family: 'Inria Sans';font-size: 12px;
   font-weight: bolder;
@@ -106,6 +114,7 @@ h1{
 .pai{
   height: 10em;
   position: relative;
+  justify-content: space-around;
 }
 form{
   
@@ -114,7 +123,8 @@ form{
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-    justify-content: space-around;
+  
+   
     
 }
 
@@ -122,63 +132,38 @@ form{
   
   width: 200px;
   height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 5px;
+  
 }
 
 #CPF_CNPJ_Estacionamento{
   width: 200px;
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+  
 
 }
-#RG_IEEstacionamento{
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
-}
+
 #botaopesquisaCNPJ{
   width: 140px;
   background-color: rgba(102, 207, 252, 1);
-  margin: 0px 5px 5px;
-  height: 25px;
-  border: none;
-  border-radius: 5px;
+  
   
 }
 
 #nomePessoaEstacionamento{
-  width:540px;
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+  width:545px;
+  
 }
 #nomeApelidioEstacionamento{
-  width: 567px;
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
-}
+  width: 578px;
 
+}
+.cep{
+  display: flex;
+}
 .cep button{
   width: 140px;
   text-align: center;
   background-color: rgba(102, 207, 252, 1);
-  margin: 0px 5px 5px;
-  height: 25px;
-  border: none;
-  border-radius: 5px;
+  
 }
 .cep img{
   float: left;
@@ -186,103 +171,54 @@ form{
   margin-right: 5px
   
 }
-#CEPEstacionemento{
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
-}
+
 
 #enderecoEstacionamento{
 width: 390px;
-margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
 }
 #numeroEstacionamento{
- width: 110px;
- margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+ width: 103px;
+ 
 }
 #complementoEstacionamento{
   width: 430px;
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+ 
 }
 #estado_ufEstacionamento{
   width: 80px;
   text-align: center;
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+
 }
 #bairroEstacionamento{
   width: 250px;
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+
 }
 #cidadeEstacionamento{
 width: 100px;
 text-align: center;
-margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+
 }
 #cidadeEstacionamentoSelect{
 width: 169px;
-margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+text-align: center;
+
 }
 #emailEstacionamento{
-width: 584px;
-margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+width: 600px;
+
 }
 #telefoneEstacionamento{
-  width: 300px;
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+  width: 280px;
+
 }
 #whatsappEstacionamento{
   width: 145px;
-  margin: 0px 5px 5px;
-  height: 25px;
-  background-color: rgba(217, 217, 217, 1);
-  border: none;
-  border-radius: 5px;
+
 }
 .botaoEstacionamento button{
 width: 150px;
 background-color: rgba(102, 207, 252, 1);
-margin: 0px 5px 5px;
-  height: 25px;
-  border: none;
-  border-radius: 5px;
+
 }
 .botaoEstacionamento{
   display: flex;
