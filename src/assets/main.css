@@ -253,13 +253,36 @@ h1 {
 .login-form {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 300px;
+    height: auto;
     margin: 5% 0 5% 5%;
-    background-color: #66CFFC;
+    background-color: #26A8DF;
     border-radius: 10px;
 }
 
 .login-container input {
     align-self: center;
     width: 80%;
+    height: 25px;
+    margin: 0 0 3% 5%;
+    border: none;
+    border-radius: 5px;
+}
+
+.login-form label {
+    color: white;
+    margin: 0 0 5% 5%;
+}
+
+.login-form button{
+    margin: 10px auto 5px auto;
+}
+
+.login-form input::placeholder {
+    color: black;
+    opacity: 80%;
+}
+
+.login-form form {
+    align-items: center;
 }
