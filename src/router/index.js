@@ -17,6 +17,8 @@ import HomeEstacionamento from '@/views/Estacionamento/HomeEstacionamento.vue'
 import LiberarVeiculo from '@/views/Estacionamento/LiberarVeiculo.vue'
 import DadosEstacionamento from '@/views/Estacionamento/DadosEstacionamento.vue'
 import FooterHome from '@/components/FooterHome.vue'
+import CadsUsuaEstacionamento from '@/views/Estacionamento/CadsUsuaEstacionamento.vue'
+import PermissoesUsuario from '@/views/Estacionamento/PermissoesUsuario.vue'
 
 
 
@@ -109,6 +111,16 @@ const router = createRouter({
       path: '/FooterHome.vue',
       name:'FooterHome',
       component : FooterHome
+    },
+    {
+      path: '/CadsUsuaEstacionamento.vue',
+      name:'CadsUsuaEstacionamento',
+      component : CadsUsuaEstacionamento
+    },
+    {
+      path: '/PermissoesUsuario.vue',
+      name:'PermissoesUsuario',
+      component : PermissoesUsuario
     },
   ],
 })
