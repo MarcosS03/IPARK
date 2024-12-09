@@ -79,89 +79,89 @@ import HeaderGeral from '@/components/HeaderGeral.vue';
 </section>
 
 <section class="gestaoVaga">
-    <a href="../Estacionamento/LiberarVeiculo.vue"><button type="button" class="botaoVaga">    
+    <RouterLink to="/LiberarVeiculo.vue"><button type="button" class="botaoVaga">    
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </button></a>
+    </button></RouterLink>
 
-    <button type="button" class="botaoVaga">       
+    <RouterLink to="/LiberarVeiculo.vue"><button type="button" class="botaoVaga">    
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </button>
+    </button></RouterLink>
 
-    <button type="button" class="botaoVaga">
+    <RouterLink to="/LiberarVeiculo.vue"><button type="button" class="botaoVaga">    
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </button>
+    </button></RouterLink>
 
-    <button type="button" class="botaoVaga">  
+    <RouterLink to="/LiberarVeiculo.vue"><button type="button" class="botaoVaga">    
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </button>
+    </button></RouterLink>
 
-    <button type="button" class="botaoVaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </button>
-
-    <button type="button" class="botaoVaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </button>
-
-    <button type="button" class="botaoVaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </button>
-
-    <button type="button" class="botaoVaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </button>
-
-    <button type="button" class="botaoVaga">
+    <RouterLink to="/LiberarVeiculo.vue"><button type="button" class="botaoVaga">    
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </button>
+    </button></RouterLink>
 
-    <button type="button" class="botaoVaga">
-        <p class="tipoVaga">tipo de vaga</p>
-        <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
-        <p class="placa">PLACA</p>
-        <p class="horaEntrada">Entrada: </p>
-    </button>
-
-    <button type="button" class="botaoVaga">
+    <RouterLink to="/EstacionarVeiculo.vue"><button type="button" class="botaoVaga">
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </button>
+    </button></RouterLink>
 
-    <button type="button" class="botaoVaga">
+    <RouterLink to="/EstacionarVeiculo.vue"><button type="button" class="botaoVaga">
         <p class="tipoVaga">tipo de vaga</p>
         <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
         <p class="placa">PLACA</p>
         <p class="horaEntrada">Entrada: </p>
-    </button>
+    </button></RouterLink>
+
+    <RouterLink to="/EstacionarVeiculo.vue"><button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button></RouterLink>
+
+    <RouterLink to="/EstacionarVeiculo.vue"><button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button></RouterLink>
+
+    <RouterLink to="/EstacionarVeiculo.vue"><button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button></RouterLink>
+
+    <RouterLink to="/EstacionarVeiculo.vue"><button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button></RouterLink>
+
+    <RouterLink to="/EstacionarVeiculo.vue"><button type="button" class="botaoVaga">
+        <p class="tipoVaga">tipo de vaga</p>
+        <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
+        <p class="placa">PLACA</p>
+        <p class="horaEntrada">Entrada: </p>
+    </button></RouterLink>
     
 
 </section>

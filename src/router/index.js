@@ -6,7 +6,6 @@ import CadastroPessoa from '@/views/CadastroPessoa.vue'
 import CadastrarVeiculo from '@/views/CadastrarVeiculo.vue'
 import Carteira from '@/views/Carteira.vue'
 import Cidade from '@/views/Cidade.vue'
-import DetVeiEstacionado from '@/views/DetVeiEstacionado.vue'
 import Estados from '@/views/Estados.vue'
 import OpcoesPerfil from '@/views/OpcoesPerfil.vue'
 import Perfil from '@/views/Perfil.vue'
@@ -19,6 +18,8 @@ import DadosEstacionamento from '@/views/Estacionamento/DadosEstacionamento.vue'
 import FooterHome from '@/components/FooterHome.vue'
 import CadsUsuaEstacionamento from '@/views/Estacionamento/CadsUsuaEstacionamento.vue'
 import PermissoesUsuario from '@/views/Estacionamento/PermissoesUsuario.vue'
+import DetVeiEstacionado from '@/views/Estacionamento/DetVeiEstacionado.vue'
+import EstacionarVeiculo from '@/views/Estacionamento/EstacionarVeiculo.vue'
 
 
 
@@ -121,6 +122,16 @@ const router = createRouter({
       path: '/PermissoesUsuario.vue',
       name:'PermissoesUsuario',
       component : PermissoesUsuario
+    },
+    {
+      path: '/DetVeiEstacionado.vue',
+      name:'DetVeiEstacionado',
+      component : DetVeiEstacionado
+    },
+    {
+      path: '/EstacionarVeiculo.vue',
+      name:'EstacionarVeiculo',
+      component : EstacionarVeiculo
     },
   ],
 })
