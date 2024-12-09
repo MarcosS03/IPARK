@@ -36,8 +36,9 @@ import footerHome from '../components/FooterHome.vue';
 
    <section class="appCelular">
       <div class="app1">
-         <img src="../assets/img/appumagem1" alt="imagems app 1">
-         <p> <b>Encontrar</b><br>
+         <img src="../assets/img/appimagem1.jpeg" alt="imagems app 1">
+         <h3><b>Encontre</b></h3>
+         <p>
             Com milhares de vagas de estacionamento disponíveis nas principais 
             cidades do Brasil, encontrar uma vaga nunca foi tão fácil. 
             Basta procurar os pinos no mapa e verificar a 
@@ -45,16 +46,18 @@ import footerHome from '../components/FooterHome.vue';
          </p>
       </div>
       <div class="app2">
-         <img src="../assets/img/appumagem2" alt="imagems app 2">
-         <p> <b>Reserva</b> <br>
+         <img src="../assets/img/appimagem2.jpeg" alt="imagems app 2">
+         <h3><b>Reserva</b></h3>
+         <p>
             Diga adeus às voltas intermináveis ​​para encontrar uma vaga. 
             Reserve sua vaga de estacionamento por até 30 minutos antes de chegar, 
             garantindo que você tenha uma vaga esperando por você.
          </p>
       </div>
       <div class="app3">
-         <img src="../assets/img/appumagem3" alt="imagems app 3">
-         <p> <b>Feito</b> <br>
+         <img src="../assets/img/appimagem3.jpeg" alt="imagems app 3">
+         <h3><b>Feito</b></h3>
+         <p>
             Pronto! Agora você pode aproveitar seu trajeto sem o estresse de 
             encontrar um Estacionamento.
          </p>
@@ -63,26 +66,33 @@ import footerHome from '../components/FooterHome.vue';
 
    <hr>
 
-   <h1>
-      <b>Estacionar com o IParka é...</b>
-   </h1>
-
-   <section class="VantagensIpark">
-      <div>
-         <img src="../assets/img/toque no touch.png" alt="touch"> <h3><b>Fácil e reservável</b></h3>
-         <p>Planeje seu dia com confiança encontrando, reservando e pagando pelo estacionamento com seu telefone. 
+   <h1><b>Estacionar com o IPark é...</b></h1>
+   <section class="vantagensIpark">
+      <div class="vantagem-01">
+         <section class="icon-titulo">
+            <img src="../assets/img/toque no touch.jpeg" alt="touch">
+            <h3><b>Fácil e reservável</b></h3>
+         </section>
+         <p>
+            Planeje seu dia com confiança encontrando, reservando e pagando pelo estacionamento com seu telefone. 
             Nosso aplicativo permite que você reserve vagas de estacionamento com facilidade, e segurança.
          </p>
       </div>
-      <div>
-         <img src="../assets/img/cartão.jpg" alt="cartão"> <h3><b>Sem dinheiro</b></h3>
+      <div class="vantagem-02">
+         <section class="icon-titulo">
+            <img src="../assets/img/cartão.jpeg" alt="cartão">
+            <h3><b>Sem dinheiro</b></h3>
+         </section>
          <p>
             Os pagamentos são descomplicados, basta usar seu cartão de crédito para 
             pagar com segurança pelo aplicativo.
          </p>
       </div>
-      <div>
-         <img src="../assets/img/lupa com estrela.png" alt="lupa com estrela"> <h3><b>Transparente</b></h3>
+      <div class="vantagem-03">
+         <section class="icon-titulo">
+            <img src="../assets/img/lupa com estrela.jpeg" alt="lupa com estrela">
+            <h3><b>Transparente</b></h3>
+         </section>
          <p>
             Saiba as tarifas horárias e diárias antes de estacionar e pagar. Seja estacionamento 
             casual ou de longo prazo, não haverá custos ocultos ou surpresas 
@@ -97,76 +107,3 @@ import footerHome from '../components/FooterHome.vue';
 </footer>
     
 </template>
-
-<style scoped>
-body{
-   display: contents;
-}
-.cabecalho2 {
-    display: flex;
-    justify-content: space-between;
-}
-.logocarro {
-    display: flex;
-    margin: 10px 10px 50px 10px;
-    font-weight: bold;
-    align-items: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-.logocarro h2 {
-    display: flex;
-    margin: 10px;
-}
-.logocarro img {
-    width: 60px;
-    height: 50px;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 3px 0 rgba(0, 0, 0, 0.5);
-}
-.cabecalho2 a {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
-    margin-right: 5px;
-}
-.cabecalho2 #link-login {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.cabecalho2 #link-login img {
-    width: 30px;
-    height: 30px;
-    border-radius: 10px;
-    padding: 5px;
-}
-#mapa {
-    display: flex;
-    flex-direction: column;
-    margin: 0 50px 0 50px;
-    padding: 0px;
-}
-#mapa section {
-    text-align: right;
-}
-#mapa section a {
-    text-decoration: none;
-    color: black;
-    margin: 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: large;
-    font-weight: bold;
-    text-shadow: 0px 2px 3px rgba(66, 66, 66, 0.5);
-}
-
-#mapa iframe {
-    align-self: flex-end;
-    width: 80%;
-    height: 700px;
-    border: 2px solid black;
-    border-radius: 10px;
-    margin: 0 50px 0 50px;
-}
-</style>

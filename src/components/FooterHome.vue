@@ -45,7 +45,6 @@ footer{
     width: 100%;
     height: 264px;
     position: absolute;
-    top: 0;
     left: 0;
 }
 .logo{
@@ -89,6 +88,7 @@ footer{
 }
 
 .painelEstacionamento img{
+    width: 15%;
     float: left;
 }
 .painelEstacionamento p{
