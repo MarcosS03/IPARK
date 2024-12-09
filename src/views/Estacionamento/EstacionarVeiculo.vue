@@ -6,10 +6,10 @@
 <section>
     <div class="veiculoCadastrado">
         <select>
-            <option value=""></option>
+            <option value="">veiculos do banco</option>
         </select>
     </div>
-    <a href="/src/views/CadastrarVeiculo.vue"><button type="button">Cadastrar novo veiculo</button></a>
+   <RouterLink to="CadastrarVeiculo.vue"><button type="button">Cadastrar novo veiculo</button></RouterLink>
 </section>
 </template>
 
