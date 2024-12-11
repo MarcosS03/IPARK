@@ -1,0 +1,300 @@
+.headerHome {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #E1DDDD;
+}
+
+.headerHome p {
+    margin: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.headerHome br {
+    display: none;
+}
+
+.headerHome #logo {
+    width: 15%;
+    background-color: #F2885B;
+    color: black;
+    margin: 10px 10px 10px 0px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.headerHome #logo h4 {
+    margin: 3%;
+}
+
+.headerHome section {
+    display: flex;
+    margin: 2px;
+    font-size: small;
+    font-weight: normal;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerHome section img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Cabeçalho IPark e Login */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+hr {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid rgb(172, 169, 169);
+}
+
+.cabecalho2 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4%;
+}
+
+.logocarro {
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.logocarro h2 {
+    display: flex;
+    margin: 10px;
+}
+
+.logocarro img {
+    width: 10%;
+    height: 70%;
+    margin-left: 5%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.cabecalho2 a {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    font-size: large;
+    font-weight: bold;
+    color: black;
+    margin-right: 5px;
+}
+
+.HomeIpark-login {
+    display: flex;
+    font-size: xx-large;
+    margin-right: 5%;
+    align-items: center;
+    gap: 10px;
+}
+
+.HomeIpark-login img {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* Mapa e opções */
+.homeIpark-opcoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+.homeIpark-opcoes a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    margin: 0.5%;
+}
+
+#mapa {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    align-items: center;
+}
+
+#mapa section {
+    align-self: last baseline;
+    margin: 0 10% 1% 0;
+}
+
+#mapa section a {
+    text-decoration: none;
+    color: black;
+    margin: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    text-shadow: 0px 2px 3px rgba(66, 66, 66, 0.5);
+}
+
+#mapa iframe {
+    width: 80%;
+    height: 700px;
+    border: 2px solid black;
+    border-radius: 20px;
+    align-self: center;
+}
+
+/* apps home */
+.appCelular {
+    display: flex;
+    color: black;
+    margin: 15% 2% 10% 2%;
+    justify-content: space-around;
+}
+
+.appCelular img {
+    align-self: center;
+    width: 215px;
+    height: 300px;
+    padding: 10px;
+}
+
+.appCelular h3 {
+    align-self: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+    font-weight: bold;
+    align-self: center;
+}
+
+.appCelular p {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: medium;
+    margin: 0;
+    text-align: center;
+}
+
+.app1 {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 40%;
+    background-color: white;
+}
+
+.app2 {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 40%;
+    background-color: white;
+}
+
+.app3 {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 40%;
+    background-color: white;
+}
+
+/* vantagens */
+h1 {
+    font-size: xx-large;
+    text-align: center;
+    margin: 8% 0 3% 0;
+}
+
+.vantagensIpark {
+    display: flex;
+    width: 100%;
+    margin: 0 1% 0 1%;
+    margin-bottom: 15%;
+}
+
+.icon-titulo img {
+    width: 30px;
+    height: 30px;
+}
+
+.icon-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vantagem-01 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 20%;
+    height: 25%;
+    text-align: center;
+}
+
+.vantagem-02 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 20%;
+    height: 25%;
+    text-align: center;
+}
+
+.vantagem-03 {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 20%;
+    height: 25%;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #E1DDDD;
+}
+
+.footer-logocarro {
+    display: flex;
+    border: 1px solid black;
+}
+
+.footer-redesSociais {
+    display: flex;
+    border: 1px solid black;
+}
+
+/* Login IPark */
+.login-container {
+    display: flex;
+    justify-content: center;
+    margin: 5% 0 5% 0;
+    /* background-color: #66CFFC; */
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 5% 0 5% 5%;
+    background-color: #66CFFC;
+    border-radius: 10px;
+}
+
+.login-container input {
+    align-self: center;
+    width: 80%;
+}
