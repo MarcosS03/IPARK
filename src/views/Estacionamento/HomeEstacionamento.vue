@@ -3,6 +3,11 @@ import HeaderGeral from '@/components/HeaderGeral.vue';
 import DAOService from '@/service/DAOService';
 import { onBeforeMount, ref} from 'vue';
 
+
+
+const vagaEscolhida = ref();
+
+
 export default {
     components: {
     HeaderGeral,
@@ -10,36 +15,39 @@ export default {
   setup() {
  
     const daoVaga = new DAOService('cadastroVaga');
+
     const listaVagas = ref([]);
     console.log(listaVagas);
 
     const listaTipos = ref([]);
-    console.log(listaTipos + 'tste lista');
 
     onBeforeMount(async() => {
         let vagas = await daoVaga.getAll();
         listaVagas.value = vagas;
-        console.log(listaVagas)
-
-       
+   
         listaTipos.value = vagas.flatMap((vagas) =>
-         Array.from({ length: vagas.quantidade }, () => vagas.tipoVaga));
-         console.log(listaTipos + 'testefun')
-        
+         Array.from({ length: vagas.quantidade }, () => vagas.tipoVaga)); 
         
     });
 
     
+    
+    const selecionarVaga = (dados)=>{
+        vagaEscolhida.value = dados;
+        alert(vagaEscolhida.value)
+        
+    }
+
     return {
         listaVagas,
         onBeforeMount,
-        listaTipos
-
+        listaTipos,
+        selecionarVaga,
+        vagaEscolhida
     };
 }
   }
-
-
+ export {vagaEscolhida};
 </script>
 
 <template>
@@ -124,8 +132,9 @@ export default {
 </section>
 
 <section class="gestaoVaga">
-    <div li v-for="(dados, index) in listaTipos" :key="index">      
-            <RouterLink to="/EstacionarVeiculo.vue"><button type="button" class="botaoVaga">
+    <div li v-for="(dados, index) in listaTipos" :key="index"> 
+
+            <RouterLink to="/EstacionarVeiculo" @click="selecionarVaga(dados)"><button type="button" class="botaoVaga">
                     <p class="tipoVaga">{{dados}} </p>
                     <img src="/src/assets/img/icons8-porta-da-garagem-aberta-50.png" width="40" height="40" alt="">
                     <p class="placa">PLACA</p>

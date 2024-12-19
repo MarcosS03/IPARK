@@ -27,7 +27,7 @@ export default {
 
     };
     const listaVagas = ref();
-    console.log(listaVagas)
+    console.log(listaVagas + 'lista de vagas')
 
         onBeforeMount (async () => {
         //pega lista de vagas do banco
