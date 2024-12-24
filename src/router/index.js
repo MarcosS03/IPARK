@@ -26,6 +26,7 @@ import ConfigVagas from '@/views/Estacionamento/ConfigVagas.vue'
 
 
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -146,7 +147,7 @@ const router = createRouter({
       path: '/ConfigVagas',
       name: 'ConfigVagas.vue',
       component: ConfigVagas
-    }
+    },
 
   ],
 })

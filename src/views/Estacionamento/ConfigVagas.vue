@@ -17,7 +17,9 @@ export default {
 
     const vagaConfig = ref ({
         tipoVaga: '',
-        quantidade: null
+        quantidade: null,
+        statuVaga: 'desocupada',
+        valorHora: ''
     });
     const vagaQuantidade = ref('');
 
@@ -26,7 +28,9 @@ export default {
         vagaConfig.quantidade = '';
 
     };
-    const listaVagas = ref();
+    const listaVagas = ref('');
+
+    
     console.log(listaVagas + 'lista de vagas')
 
         onBeforeMount (async () => {
@@ -50,7 +54,7 @@ export default {
 let vagaSelecionada = ref('');
 
 const salvarQuantidade = async ()=>{
-        let vaga = listaVagas.find(v => v.tipoVaga === vagaSelecionada.value)
+        let vaga = listaVagas.value.find(v => v.tipoVaga === vagaSelecionada.value)
         console.log(vaga)
         vaga.quantidade = vagaQuantidade.value
         console.log(vaga)
@@ -81,6 +85,7 @@ const salvarQuantidade = async ()=>{
 <div class="tipoVaga">
     <label for="tipoVaga">Adicionar tipo de vaga</label>
     <input type="text" id="tipoVaga" v-model="vagaConfig.tipoVaga">
+    <input type="text"  id="valorHora" v-model="vagaConfig.valorHora">
     <button type="button" @click="cadastroVaga">cadastrar</button>
 </div>
 <div>

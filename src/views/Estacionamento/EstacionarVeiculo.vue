@@ -1,7 +1,7 @@
 <script>
 import DAOService from '@/service/DAOService';
 import { onBeforeMount, ref } from 'vue';
-import {vagaEscolhida} from '@/views/Estacionamento/HomeEstacionamento.vue'
+
 
 export default{
 
@@ -9,35 +9,58 @@ export default{
 
         const daoVeiculo = new DAOService('veiculos');
 
-        const daoEstacionar = new DAOService('dadosEstacionar')
+        const daoEstacionado = new DAOService('veiculoEstacionado')
 
         let vs = vagaEscolhida;
+        
+        const listaVeiculo = ref ();
 
-        let listaVeiculo = [];
+        const dadosVeiEst = ref({
+            tipoVaga: '',
+            placa: '',
+            chassi : '',
+            renavam :'',
+            modelo : '',
+            fabricante:'',
+            anoFabricacao : '',
+            anoModelo :'',
+            cor: '',
+            potencia : '',
+            capacidade: '',
+            HoraEntrada: '',
+            HoraSaida: ''
+        })
 
+
+    const veiculoEstaciona =()=>{
+
+    }
 
 onBeforeMount (async () => {
     //pega lista de vagas do banco
-    listaVeiculo = await daoVeiculo.getAll();
+   let lv= await daoVeiculo.getAll();
+   console.log(lv)
+   listaVeiculo.value = lv;
     //pega o ID do select para inserir os option
     let veiculo = document.getElementById('listaVeiculos');
 
     //inetração para inserir os tipos de vagas no option, e criar o option do select
-    listaVeiculo.forEach(function(veiculos){
+    lv.forEach(function(veiculos){
         let v = veiculos.placa;
         let item = document.createElement('Option');
         item.text = `${v}`;
         veiculo.appendChild(item);
-        return listaVeiculo.push(veiculos)
+        
     }); 
 });
 
     const veiculoSelecionado = ref();
-    console.log(veiculoSelecionado.placa + 'veiculo selecionado')
+    console.log(veiculoSelecionado + 'veiculo selecionado')
     
     const estacionar = ()=> {
-        let placa = listaVeiculo.find(v => v.palaca === veiculoSelecionado.value)
-        console.log(placa.value + 'teste')
+        let placa = listaVeiculo.value.find(v => v.palaca === veiculoSelecionado.value)
+        console.log(placa)
+        console.log(placa.placa+ 'teste')
     }
 
 
@@ -56,15 +79,19 @@ onBeforeMount (async () => {
 </script>
 
 <template>
-<section>
+
     <div class="veiculoCadastrado">
+        <label for="">Lista de veiculos: </label>
         <select id="listaVeiculos"  v-model="veiculoSelecionado">
             <option selected disabled>Seleciona a placa</option>    
         </select>
         <button type="button" @click="estacionar">Estacionar</button>
     </div>
-   <RouterLink to="CadastrarVeiculo.vue"><button type="button">Cadastrar novo veiculo</button></RouterLink>
-</section>
+    <div>
+        <label for="">caso não encontre a placa, cadastre um novo veiculo: </label>
+        <RouterLink to="CadastrarVeiculo.vue"><button type="button">Cadastrar novo veiculo</button></RouterLink>
+    </div>
+
 </template>
 
 <style>
