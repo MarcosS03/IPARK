@@ -1,6 +1,9 @@
 # IPark
 
-This template should help get you started developing with Vue 3 in Vite.
+Este projeto tem como objetivo ajudar o gerenciamento dos estacionamentos, e agilizar o processo de procura por um estacionamento com vaga livre.
+Onde o motorista utilizará um aplicativo de celular encontrar e resevar vaga no estacionamento.
+
+Para isto estamos utilizando algumas tecnológia como: VUEJS, JavaScript, e o Firebase.
 
 ## Recommended IDE Setup
 
