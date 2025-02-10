@@ -17,7 +17,6 @@ import footerHome from '../components/FooterHome.vue';
          <h2>I PARK</h2>
       </div>
       <div class="link-login">
-         <img src="../assets/img/icons8-usuário-30.png" alt="logo usuario">
       </div>
    </div>
 

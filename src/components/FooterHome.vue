@@ -21,8 +21,8 @@
             <a href="https://www.twitter.com"><button type="button"><img src="../assets/img/icons8-twitter-50.png" alt="twiter"></button></a>
         </div>
             <div class="painelEstacionamento">
-            <a href="../views/Login.vue"><button type="button"><img src="../assets/img/icons8-estacionamento-50.png" alt="icone P">
-                <p>Painel do estacionamento</p></button></a>
+            <RouterLink to="HomeEstacionamento"> <button type="button"><img src="../assets/img/icons8-estacionamento-50.png" alt="icone P">
+                <p>Painel do estacionamento</p></button></RouterLink>
             </div>
         </div>
  
