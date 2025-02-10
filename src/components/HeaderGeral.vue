@@ -1,4 +1,6 @@
 <script>
+import { getAuth, reload, signOut } from 'firebase/auth';
+
 export default{
 
     setup() {
@@ -10,8 +12,15 @@ function toggleDropdown() {
       dropdown.style.display = 'block';
     }
   }
+
+  async function sair () {
+    const auth = getAuth();
+    await signOut(auth);
+    location.reload();
+  }
   return {
-        toggleDropdown
+        toggleDropdown,
+        sair
     };
 }
 
@@ -41,6 +50,7 @@ function toggleDropdown() {
                             <RouterLink to="DadosEstacionamento"><div id="empresa">Empresa</div></RouterLink>
                             <RouterLink to="configVagas"><div id="confVaga">Configurar vaga</div></RouterLink>
                             <RouterLink to="CadsUsuaEstacionamento"><div id="usuario">Usuario</div></RouterLink>
+                            <RouterLink to=""><div id="sair" @click="sair">Sair</div></RouterLink>
                         
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 <script>
 import HeaderGeral from '@/components/HeaderGeral.vue';
 import DAOService from '@/service/DAOService';
+import LoginService from '@/service/LoginService';
+import { getAuth } from 'firebase/auth';
 import { onBeforeMount, onMounted, ref } from 'vue';
 
 export default {
@@ -9,7 +11,10 @@ export default {
 
   },
   setup() {
-  const daoUsuario = new DAOService('dadosUsuario')
+  const daoUsuario = new DAOService('dadosUsuario');
+
+  const loginUsuario =  new LoginService();
+
   //falta ajustar a função alterar, quando tento modificar algum item do formulario o restante some da tela,
   //e quandoclica em alterar, é enviada para o banco apenas a a alteração, sem os demais itens.
 
@@ -38,35 +43,37 @@ export default {
 
   });
 
-
+  const dadosLogin = ref ({
+    email: '',
+    senha: ''
+  })
 
 
   onBeforeMount (async () => {
       //pega lista de usuario do banco
-      let vagas = await daoUsuario.getAll();
+      let usuarios = await daoUsuario.getAll();
+
+      const usuarioAuth = getAuth();
+      const user = usuarioAuth.currentUser;
+
+      const usuario = usuarios.find(u => u.object.idUsuario === user.uid);
 
       //pega o ID do select para inserir os option
-      //let tipoVaga = document.getElementById('listarVagas');
-
-      //inetração para inserir os tipos de vagas no option, e criar o option do select
-      vagas.forEach(function(dados){
-          
-        document.querySelector('#CPF').value = dados.CPF;
-        document.querySelector('#RG').value = dados.RG;
-        document.querySelector('#nomePessoa').value = dados.nome;
-        document.querySelector('#nomeApelidio').value =dados.apelidio;
-        document.querySelector('#CEP').value = dados.cep;
-        document.querySelector('#endereco').value = dados.endereço;
-        document.querySelector('#bairro').value = dados.bairro;
-        document.querySelector('#numero').value = dados.numero;
-        document.querySelector('#estado_uf').value  = dados.uf;
-        document.querySelector('#cidadeSelect').value = dados.cidade;
-        document.querySelector('#complemento').value = dados.complemento;
-        document.querySelector('#telefone').value = dados.telefone;
-        document.querySelector('#whatsapp').value = dados.whatsApp;
+        document.querySelector('#CPF').value = usuario.object.CPF;
+        document.querySelector('#RG').value = usuario.object.RG;
+        document.querySelector('#nomePessoa').value = usuario.object.nome;
+        document.querySelector('#nomeApelidio').value =usuario.object.apelidio;
+        document.querySelector('#CEP').value = usuario.object.cep;
+        document.querySelector('#endereco').value = usuario.object.endereço;
+        document.querySelector('#bairro').value = usuario.object.bairro;
+        document.querySelector('#numero').value = usuario.object.numero;
+        document.querySelector('#estado_uf').value  = usuario.object.uf;
+        document.querySelector('#cidadeSelect').value = usuario.object.cidade;
+        document.querySelector('#complemento').value = usuario.object.complemento;
+        document.querySelector('#telefone').value = usuario.object.telefone;
+        document.querySelector('#whatsapp').value = usuario.object.whatsApp;
         
 
-      })
   });
 
   let idUsuario ='';
@@ -80,8 +87,11 @@ export default {
     });
 
 
-  const salvar = async()=>{
-    await daoUsuario.insert(dadosUsuario.value)
+  const cadastrar = async()=>{
+
+    await loginUsuario.createUser( dadosUsuario.value, dadosLogin.value.email, dadosLogin.value.senha )
+
+    
     alert('cadastro salvo com sucesso')
     
   }
@@ -93,11 +103,13 @@ export default {
 
   }
   return {
-    salvar,
+    cadastrar,
     alterar,
     onBeforeMount,
     dadosUsuario,
-    daoUsuario
+    daoUsuario,
+    dadosLogin,
+    loginUsuario
 
   };
 }
@@ -124,7 +136,12 @@ export default {
 
 <section class="dadosUsuario">
   <div class="titulo">
-    <h1>USUARIO</h1>
+    <h1>USUARIO 
+      <select name="" id="">
+        <option disabled value="">Usuarios</option>
+      </select>
+    </h1>
+
   </div>
 
  <div class="divForm">
@@ -184,10 +201,17 @@ export default {
     <input type="tel" id="whatsapp" v-model="dadosUsuario.whatsApp">
   </div>
 
-   <div class="botaoSalvar">
-    <button type="button" @click="alterar">Alterar</button>
-   <button type="button" @click="salvar">Salvar</button>
+  <div class="loginSenha">
+    <label for="login">LOGIN</label>
+    <input type="email" id="login" v-model="dadosLogin.email">
 
+    <label for="senha">SENHA</label>
+    <input type="password" id="senha" v-model="dadosLogin.senha">
+  </div>
+
+  <div class="botaoSalvar">
+    <button type="button" @click="alterar">Alterar</button>
+    <button type="button" @click="cadastrar">Cadastrar</button>
   </div>
 
 </div>
@@ -252,7 +276,7 @@ body{
   
 }
 .titulo{
-  margin-top: 15%;
+  margin-top: 10%;
   margin-bottom: 5%;
   margin-left: 18%;
   
@@ -270,7 +294,7 @@ h1{
 .divForm{
   
     position: absolute;
-    top: 72%;
+    top: 65%;
     left: 55%;
     margin-right: -50%;
     transform: translate(-50%, -50%);

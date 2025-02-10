@@ -1,6 +1,7 @@
 <script>
 import HeaderGeral from '@/components/HeaderGeral.vue';
 import DAOService from '@/service/DAOService';
+import { getAuth } from 'firebase/auth';
 import { onBeforeMount, ref } from 'vue';
 
 
@@ -11,23 +12,32 @@ export default {
   },
 setup() {
     const daoUsuario = new DAOService('dadosUsuario')
-    const usuarioLogado = '';
+    const usuarioLogado = ref();
 
-    const teste = ref(false);
-    console.log(teste.value)
-
+    
     onBeforeMount (async () => {
         //pega lista de usuario do banco
-        let vagas = await daoUsuario.getAll();
-    
+        let usuarios = await daoUsuario.getAll();
+
+        const usuarioAuth = getAuth();
+        const user = usuarioAuth.currentUser;
+
+        usuarioLogado.value = usuarios.find(u => u.object.idUsuario === user.uid);
+        console.log(usuarioLogado.value)
+
+   
     });
 
+    const alterar =async ()=> {
 
+        await daoUsuario.update(usuarioLogado.value.id, usuarioLogado.value)
+        alert("permissões alteradas")
+    }
     return {
         daoUsuario,
         usuarioLogado,
         onBeforeMount,
-        teste,
+        alterar
 
     }
     }
@@ -58,11 +68,11 @@ setup() {
             <div class="camposCheckbox">
                 <label for="visualizarDashboard">
                     visualizar Dashboard 
-                    <input type="checkbox"  id="visualizarDashboard" value="visualizarDashboard" v-model="teste">
+                    <input type="checkbox"  id="visualizarDashboard" value="visualizarDashboard" v-model="usuarioLogado.object.visDashboard">
                 </label>
                 <label for="desconto">
                     dar descontos
-                    <input type="checkbox" id="desconto" value="desconto">
+                    <input type="checkbox" id="desconto" value="desconto"  v-model="usuarioLogado.object.darDesconto">
                 </label>   
             </div>
         </div>
@@ -70,23 +80,26 @@ setup() {
             <div class="camposCheckbox">
                 <label for="cadastrarUsuario">
                     cadastrar Usuario
-                    <input type="checkbox" id="cadastrarUsuario" value="cadastrarUsuario">
+                    <input type="checkbox" id="cadastrarUsuario" value="cadastrarUsuario"  v-model="usuarioLogado.object.cadastrarUsuario">
                 </label>
+                
                 <label for="tipoVaga">
                     cadastar tipo de vaga 
-                    <input type="checkbox" id="tipoVaga" value="tipoVaga">
+                    <input type="checkbox" id="tipoVaga" value="tipoVaga" v-model="usuarioLogado.object.cadasTipoVaga">
                 </label>
             </div> 
+            
         </div>
+        
         <div class="linhaTres">
             <div class="camposCheckbox">
                 <label for="valorvaga">
                     alterar valor da vaga
-                    <input type="checkbox"id="valorvaga" value="valorvaga">
+                    <input type="checkbox"id="valorvaga" value="valorvaga"  v-model="usuarioLogado.object.altValorVaga">
                 </label>
                 <label for="financeiro">
                     financeiro 
-                    <input type="checkbox" id="financeiro" value="financeiro">
+                    <input type="checkbox" id="financeiro" value="financeiro" v-model="usuarioLogado.object.financeiro">
                 </label>
             </div>   
         </div>
@@ -94,17 +107,16 @@ setup() {
             <div class="camposCheckbox">
                 <label for="cadastrarvaga">
                     Cadastrar vagas
-                    <input type="checkbox" id="cadastrarvaga" value="cadastrarvaga">
+                    <input type="checkbox" id="cadastrarvaga" value="cadastrarvaga" v-model="usuarioLogado.object.cadasVaga">
                 </label>
                 <label for="carteira">
                     Carteira
-                    <input type="checkbox" id="carteira" value="carteira">
+                    <input type="checkbox" id="carteira" value="carteira" v-model="usuarioLogado.object.carteira">
                 </label>
             </div>    
         </div>
-
-    </form>
-    <p>Status: {{ teste ? 'Aceito' : 'Não aceito' }}</p>
+    </form >
+    <button type="button" @click="alterar">Alterar</button>
 </section>
 </template>
 

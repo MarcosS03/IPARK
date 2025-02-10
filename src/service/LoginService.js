@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithCredential, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import DAOService from "./DAOService";
 
 class LoginService {
@@ -19,14 +19,25 @@ class LoginService {
 
     async createUser(object, email, senha) {
         try {
+            const usuarioAtual = this.auth.currentUser;
+
             const userCredencial = await createUserWithEmailAndPassword(this.auth, email, senha);
 
-            const dao = new DAOService('usuario');
+            const dao = new DAOService('dadosUsuario');
 
-            await dao.insert( { object, userId: userCredencial.user.uid } );
+            object.idUsuario = userCredencial.user.uid;
 
-            console.log(userCredencial.user);
+            await dao.insert( { object } );
+
+            await signOut(this.auth);
+
+            if (usuarioAtual) {
+                const credential = usuarioAtual; // Pode usar usuarioAtual.reload() para garantir sessão ativa
+                await signInWithCredential(this.auth, credential);
+            }
             return userCredencial;
+
+
         } catch(error) {
             console.log('Erro ao criar usuário', error.message);
             throw error;
