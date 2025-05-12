@@ -32,24 +32,26 @@ import { RouterLink } from 'vue-router';
 </footer>
 </template>
 
-<style>
-
+<style scoped>
 footer{
-    font-family: 'Inria Sans';font-size: 22px;
+    font-family: 'Inria Sans';
+    font-size: 22px;
 }
 
 .footerHome{
-    
-    display: flex; 
+    position: absolute;
+    display: flex;
     flex-direction: row;
     justify-content:space-between;
     background-color:rgba(160, 152, 152, 0.15);
-    width: 100%;
     height: 264px;
-    position: absolute;
+    width: 100%;
+    top: 2500px;
+    right: 0;
     left: 0;
     bottom: 0;
 }
+
 .logo{
     display: flex;
     align-items: center;
@@ -65,24 +67,23 @@ footer{
    
      
 }
+
 .logo img{
     float: left;
     box-shadow: 0 5px 10px 0px #4e4d4d;
     border-radius: 15px;
-    
 }
 
 .redesSociais{
     margin-right: 80px;
     align-content: center;
-
 }
 
 .redesSociais button{
     border: none;
     cursor: pointer;
-
 }
+
 .botao{
     display: flex;
     justify-content: center;
@@ -94,11 +95,13 @@ footer{
     width: 15%;
     float: left;
 }
+
 .painelEstacionamento p{
     font-family: 'Inria Sans';
     font-size: 15px;
     font-weight: bolder;
 }
+
 .painelEstacionamento button{
     width: 250px;
     border: none;
@@ -108,6 +111,4 @@ footer{
 button:hover{
     box-shadow: 0 5px 10px 0px #4e4d4d;
 }
-
-
 </style>

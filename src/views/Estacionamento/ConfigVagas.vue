@@ -1,10 +1,15 @@
 <script>
+import HeaderGeral from '@/components/HeaderGeral.vue';
 import DAOService from '@/service/DAOService';
 import { onBeforeMount, ref } from 'vue';
 
 
 
 export default {
+    components: {
+    HeaderGeral,
+
+  },
 
     setup() {
     const daoTipoVaga = new DAOService ('cadastroVaga');
@@ -13,19 +18,33 @@ export default {
 
     const cadastroVaga = async()=>{
 
-         // Remove quaisquer caracteres que não sejam números ou ponto/virgula
-       let valorLimpo = vagaConfig.value.valorHora.replace(/(\d+),(\d+)/, "$1.$2");
-        vagaConfig.value.valorHora = valorLimpo;
-        await daoTipoVaga.insert(vagaConfig.value);
+        // Remove quaisquer caracteres que não sejam números ou ponto/virgula
+       let valorLimpo = vagaConfig.value.valor.replace(/(\d+),(\d+)/, "$1.$2");
+        vagaConfig.value.valor = valorLimpo;
+        
+        vagaConfig.value.estacionamentoID = 1;
+        //let dadosVaga = {...vagaConfig.value};
+
+        let dadosVaga = await addvaga(vagaConfig.value);
+
         alert('vaga cadastrada!')
+        console.log(dadosVaga);
+
+        console.log(listaVagas.value)
+        listaVagas.value.push(dadosVaga);
+
+        
         await limpaDadosVaga();
     }
 
     const vagaConfig = ref ({
+        descricão: '',
         tipoVaga: '',
         quantidade: null,
         statuVaga: 'desocupada',
-        valorHora: null
+        valor: null,
+        estacionamentoID: null
+      
 
     });
     const vagaQuantidade = ref('');
@@ -33,9 +52,9 @@ export default {
     const limpaDadosVaga = ()=>{
         vagaConfig.value.tipoVaga = '';
         vagaConfig.value.quantidade = '';
-        vagaConfig.value.valorHora = '';
+        vagaConfig.value.valor = '';
     };
-    const listaVagas = ref('');
+    const listaVagas = ref([]);
 
     const listaDaoDadosVagas =  ref ([]);
 
@@ -43,13 +62,18 @@ export default {
 
         onBeforeMount (async () => {
         //pega lista de vagas do banco
-        let vagas = await daoTipoVaga.getAll();
-        listaVagas.value = vagas
+        let vagas = await fetch("http://localhost:8080/vaga/vagas")//daoTipoVaga.getAll();
+            if(!vagas.ok){
+                throw new Error("vErro ao buscar vagas!")
+            }
+            
+        listaVagas.value = await vagas.json();
+        console.log(listaVagas.value)
         //pega o ID do select para inserir os option
         let tipoVaga = document.getElementById('listarVagas');
 
         //inetração para inserir os tipos de vagas no option, e criar o option do select
-        vagas.forEach(function(veiculos, index){
+        listaVagas.value.forEach(function(veiculos, index){
             let v = veiculos.tipoVaga;
             let item = document.createElement('Option');
             item.text = `${v}`;
@@ -92,9 +116,12 @@ const listaAtualizada = ref([]);
 
 const salvarQuantidade = async ()=>{
         let vaga = listaVagas.value.find(v => v.tipoVaga === vagaSelecionada.value)
+        console.log(vaga);
         vaga.quantidade = vagaQuantidade.value;
 
-        await daoTipoVaga.update(vaga.id, vaga)
+        vaga.estacionamentoID = vaga.estacionamento.id;
+        
+        await atualizarVaga(vaga.id, vaga);
 
 
         //função para mutiplicar a quantidade de vagas em uma outra coleção
@@ -132,9 +159,80 @@ const salvarQuantidade = async ()=>{
         }
             alert('Vaga atualizada!!!')
 }
-    await multiplicarVaga();
+    //await multiplicarVaga();
     await limpaDadosVaga();
 }
+async function atualizarVaga(id, vagaAtualizada) {
+    console.log(vagaAtualizada)
+            try {
+                const response = await fetch(`http://localhost:8080/vaga/updateVaga/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(vagaAtualizada), // Enviando os dados atualizados
+                });
+
+                if (!response.ok) {
+                throw new Error('Erro ao atualizar vaga');
+                }
+
+                const vaga = await response.json();
+                console.log('Vaga atualizada com sucesso:', vaga);
+            } catch (error) {
+                console.error('Erro ao atualizar vaga:', error);
+            }
+        }
+
+async function addvaga(novaVaga) {
+    try {
+        
+        const response = await fetch(`http://localhost:8080/vaga/insert`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(novaVaga), // Enviando os dados para o banco
+        });
+
+        if (!response.ok) {
+        throw new Error('Erro ao vadastrar vaga');
+        }
+
+        const vaga = await response.json();
+        console.log('Vaga cadastrada com sucesso:', vaga);
+
+        return vaga;
+    } catch (error) {
+        console.error('Erro ao cadastrar vaga:', error);
+    }
+}
+
+async function deletarVaga(index) {
+    const vaga = this.listaVagas[index];
+
+    // Confirmação opcional
+    const confirmar = confirm(`Deseja deletar a vaga: ${vaga.tipoVaga}?`);
+    if (!confirmar) return;
+
+    try {
+      // Requisição DELETE ao backend
+      const response = await fetch(`http://localhost:8080/vaga/${vaga.id}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao deletar vaga no servidor');
+      }
+
+      // Remove da lista local após sucesso
+      this.listaVagas.splice(index, 1);
+    } catch (error) {
+      console.error('Erro ao deletar vaga:', error);
+      alert('Não foi possível deletar a vaga. Tente novamente.');
+    }
+  }
+
     return{
         cadastroVaga,
         daoTipoVaga,
@@ -147,7 +245,8 @@ const salvarQuantidade = async ()=>{
         vagaConfig,
         daoDados,
         listaTipoVagaAgr,
-        listaDaoDadosVagas
+        listaDaoDadosVagas,
+        deletarVaga
        
     };
     }
@@ -155,6 +254,9 @@ const salvarQuantidade = async ()=>{
 </script>
 
 <template>
+    <header>
+        <HeaderGeral/>
+    </header>
 <body>
 <div class="geral">
 <h1>Vagas</h1>
@@ -162,7 +264,7 @@ const salvarQuantidade = async ()=>{
 <div class="tipoVaga">
     <label for="tipoVaga">Adicionar tipo de vaga</label>
     <input type="text" id="tipoVaga" v-model="vagaConfig.tipoVaga">
-    <input type="text"  id="valorHora" v-model="vagaConfig.valorHora">
+    <input type="text"  id="valorHora" v-model="vagaConfig.valor" placeholder="Valor">
     <button type="button" @click="cadastroVaga">cadastrar</button>
 </div>
 <div class="selecVaga">
@@ -172,7 +274,7 @@ const salvarQuantidade = async ()=>{
         <option disabled value="">Selecione uma opção</option>
         
     </select >
-    <input type="text" v-model="vagaQuantidade" >
+    <input type="text" v-model="vagaQuantidade" placeholder="Qtde.">
     <button type="button" @click="salvarQuantidade">salvar</button>
 </div>
 
@@ -180,11 +282,14 @@ const salvarQuantidade = async ()=>{
 <div class="vagasVinculadas">
     <p>Tipos de vagas vinculadas</p>
     <div v-for="(v, index) in listaVagas" :key="index" id="vaga">
-        <div>
-            <p>{{ v.tipoVaga }} [{{ v.quantidade }}]</p>
+        <div class="deletarVaga">
+            <p>{{ v.tipoVaga }} [{{ v.quantidade }}]
+                <button type="button" id="botãoDeleArquivo" @click="deletarVaga(index)" >❌</button> 
+            </p>
         </div>
-        
+
     </div>
+
 </div>
 </section>  
 </div> 
@@ -270,5 +375,39 @@ body{
     width: 150px;
     background-color: rgb(6, 128, 6);
     color: white;
+}
+.deletarVaga{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+}
+.deletarVaga p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  
+}
+#botãoDeleArquivo{
+    border: none;
+    font-size: 10px;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    width: 10px;
+    height: 10px;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+#botãoDeleArquivo:hover{
+    font-size: 15px;
+
 }
 </style>

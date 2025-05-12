@@ -196,7 +196,7 @@ body{
 h1{
   font-size: 40px;
   margin-left: 7%;
-  margin-top: 50%;
+  margin-top: 12%;
   margin-bottom: 7%;
   width: max-content;
 }

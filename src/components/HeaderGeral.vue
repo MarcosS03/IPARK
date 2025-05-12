@@ -32,12 +32,14 @@ function toggleDropdown() {
     <header>
         <div class="headergeral">
             <div class="logo">
-                <img src="../assets/img/carro-estacionado.png" alt="logo carro" width="95" height="67">
+                <RouterLink to="HomeEstacionamento">
+                <img src="../assets/img/carro-estacionado.png" alt="logo carro" width="95" height="67"></RouterLink>
                 <p>I PARK</p>
+            
             </div>
             <div class="iconeUsuario">
 
-                <a href="../views/HomeIPark.vue"><button type="button" class="buttonSemIcone"> home </button></a>
+                <RouterLink to="HomeEstacionamento"><button type="button" class="buttonSemIcone"> home </button></RouterLink>
                 <a href="../views/HomeIPark.vue"><button type="button" class="buttonSemIcone"> suporte </button></a>
                 <a href="../views/Carteira.vue"><button type="button" class="buttonIcone"><img src="../assets/img/icons8-carteira-60.png" alt="carteira"></button></a>
 <div>

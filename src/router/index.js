@@ -21,6 +21,7 @@ import DetVeiEstacionado from '@/views/Estacionamento/DetVeiEstacionado.vue'
 import EstacionarVeiculo from '@/views/Estacionamento/EstacionarVeiculo.vue'
 import HeaderGeral from '@/components/HeaderGeral.vue'
 import ConfigVagas from '@/views/Estacionamento/ConfigVagas.vue'
+import NovoEstacionamento from '@/views/Estacionamento/NovoEstacionamento.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 
@@ -81,6 +82,11 @@ const router = createRouter({
       path: '/Estados',
       name:'Estados',
       component : Estados
+    },
+    {
+      path: '/NovoEstacionamento',
+      name: 'NovoEstacionamento.vue',
+      component: NovoEstacionamento
     },
     {
       path: '/OpcoesPerfil',

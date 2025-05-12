@@ -71,6 +71,7 @@ const recoverPassword = () => {
                     <button @click="login">ENTRAR</button>
                     
                 </div>
+                <RouterLink to="NovoEstacionamento">Novo estacionamento</RouterLink>
             </div>
         </div>
     </div>
