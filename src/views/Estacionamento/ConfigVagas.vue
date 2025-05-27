@@ -12,9 +12,6 @@ export default {
   },
 
     setup() {
-    const daoTipoVaga = new DAOService ('cadastroVaga');
-
-    const daoDados = new DAOService('daoDadosVagas');
 
     const cadastroVaga = async()=>{
 
@@ -33,17 +30,18 @@ export default {
         console.log(listaVagas.value)
         listaVagas.value.push(dadosVaga);
 
-        
+        //await lista_Vagas();
         await limpaDadosVaga();
     }
 
     const vagaConfig = ref ({
-        descricão: '',
+ 
         tipoVaga: '',
         quantidade: null,
         statuVaga: 'desocupada',
         valor: null,
-        estacionamentoID: null
+        estacionamentoID: null,
+        cadastroVagaID: null
       
 
     });
@@ -61,38 +59,18 @@ export default {
     const listaTipoVagaAgr = ref([]);
 
         onBeforeMount (async () => {
-        //pega lista de vagas do banco
-        let vagas = await fetch("http://localhost:8080/vaga/vagas")//daoTipoVaga.getAll();
-            if(!vagas.ok){
-                throw new Error("vErro ao buscar vagas!")
-            }
-            
-        listaVagas.value = await vagas.json();
-        console.log(listaVagas.value)
-        //pega o ID do select para inserir os option
-        let tipoVaga = document.getElementById('listarVagas');
-
-        //inetração para inserir os tipos de vagas no option, e criar o option do select
-        listaVagas.value.forEach(function(veiculos, index){
-            let v = veiculos.tipoVaga;
-            let item = document.createElement('Option');
-            item.text = `${v}`;
-            //Estilizar o option direto no css não deu certo, pois apenas o option adicionado no html estva sendo estilizado
-            item.style.cssText = "font-size: 14px; padding: 5px; margin: 2px; border: 2px solid #ddd; border-radius: 5px; width: 180px; text-align: center";
-            item.addEventListener('mouseover', () => item.style.backgroundColor = 'rgb(228, 234, 247)');
-            item.addEventListener('mouseout', () => item.style.backgroundColor = '#ffffff');
-
-            tipoVaga.appendChild(item);
-
-        })
+       
+            await lista_Vagas();
 
         //alimenta a lista com todas as vagas disponiveis no banco
-        listaDaoDadosVagas.value = await daoDados.getAll();
-
+        let lista = await fetch("http://localhost:8080/ListaVagas/ListaVagas");
+        listaDaoDadosVagas.value = await lista.json();
+    
         //função para separar vagas por tipos
         function agruparPorTipo() {
                 const agrupados = {}; 
                 for (const i of listaDaoDadosVagas.value){
+                    console.log(i)
                     const { tipoVaga } = i;
                     if (!agrupados[tipoVaga]) {
                     agrupados[tipoVaga] = [];
@@ -105,8 +83,35 @@ export default {
             }
 
         await agruparPorTipo();
+        console.log(listaTipoVagaAgr.value)
 }); 
 
+    async function lista_Vagas (){
+     //pega lista de vagas do banco
+        let vagas = await fetch("http://localhost:8080/vaga/vagas")//daoTipoVaga.getAll();
+            if(!vagas.ok){
+                throw new Error("vErro ao buscar vagas!")
+            }
+            
+        listaVagas.value = await vagas.json();
+        console.log(listaVagas.value)
+        //pega o ID do select para inserir os option
+        let tipoVaga = document.getElementById('listarVagas');
+
+        //interação para inserir os tipos de vagas no option, e criar o option do select
+        listaVagas.value.forEach(function(veiculos, index){
+            let v = veiculos.tipoVaga;
+            let item = document.createElement('Option');
+            item.text = `${v}`;
+            //Estilizar o option direto no css não deu certo, pois apenas o option adicionado no html estva sendo estilizado
+            item.style.cssText = "font-size: 14px; padding: 5px; margin: 2px; border: 2px solid #ddd; border-radius: 5px; width: 180px; text-align: center";
+            item.addEventListener('mouseover', () => item.style.backgroundColor = 'rgb(228, 234, 247)');
+            item.addEventListener('mouseout', () => item.style.backgroundColor = '#ffffff');
+
+            tipoVaga.appendChild(item);
+
+        })
+}
 let vagaSelecionada = ref('');
 
 
@@ -116,9 +121,10 @@ const listaAtualizada = ref([]);
 
 const salvarQuantidade = async ()=>{
         let vaga = listaVagas.value.find(v => v.tipoVaga === vagaSelecionada.value)
-        console.log(vaga);
+        
         vaga.quantidade = vagaQuantidade.value;
 
+        console.log(vaga)
         vaga.estacionamentoID = vaga.estacionamento.id;
         
         await atualizarVaga(vaga.id, vaga);
@@ -126,40 +132,53 @@ const salvarQuantidade = async ()=>{
 
         //função para mutiplicar a quantidade de vagas em uma outra coleção
         const multiplicarVaga = async ()=>{
-            let vagas = [await daoTipoVaga.get(vaga.id)];
+            let vagas = [await getVaga(vaga.id)];
 
             listaTipos.value = vagas.flatMap((vagas) =>
             Array.from({ length: vagas.quantidade  }, () => vagas));
 
             //.map para eliminar o id que está se repetindo da lista de tipos.
             const propriedadeParaRemover = 'id'
-            listaAtualizada.value = listaTipos.value.map(({ [propriedadeParaRemover]: _, ...resto }) => resto);
-          
+            listaAtualizada.value = listaTipos.value //.map(({ [propriedadeParaRemover]: _, ...resto }) => resto);
+            console.log(listaAtualizada.value )
 
             const verificarVaga = listaTipoVagaAgr.value.find(sublista =>sublista.some(vaga => vaga.tipoVaga === vagaSelecionada.value));
             console.log(verificarVaga)
             if(verificarVaga){
                 for (const v of verificarVaga){
                     console.log(v.id)
-                    daoDados.delete(v.id);
+                    deletarListaVaga(v.id);
                     console.log('deletando dados')
                 }
                 for (const i of listaAtualizada.value) {
-                    i.quantidade = '1';
-                    await daoDados.insert(i);
+                    vagaConfig.value.tipoVaga = i.tipoVaga
+                    vagaConfig.value.quantidade = '1'
+                    vagaConfig.value.statuVaga = 'desocupada'
+                    vagaConfig.value.valor = i.valor
+                    vagaConfig.value.estacionamentoID = i.estacionamento.id;
+                    vagaConfig.value.cadastroVagaID = i.id;
+                    console.log(vagaConfig.value)
+                    await addListavaga(vagaConfig.value);
+                    await limpaDadosVaga();
                     console.log('atualizando dados')
                 }
             }else{
             for (const i of listaAtualizada.value) {
-                i.quantidade = '1';
-                await daoDados.insert(i);
+                vagaConfig.value.tipoVaga = i.tipoVaga
+                vagaConfig.value.quantidade = '1'
+                vagaConfig.value.statuVaga = 'desocupada'
+                vagaConfig.value.valor = i.valor
+                vagaConfig.value.estacionamentoID = i.estacionamento.id;
+                vagaConfig.value.cadastroVagaID = i.id;
+                await addListavaga(vagaConfig.value);
+                await limpaDadosVaga();
                 console.log('inserindo dados')
             }
            
         }
             alert('Vaga atualizada!!!')
 }
-    //await multiplicarVaga();
+    await multiplicarVaga();
     await limpaDadosVaga();
 }
 async function atualizarVaga(id, vagaAtualizada) {
@@ -207,7 +226,69 @@ async function addvaga(novaVaga) {
         console.error('Erro ao cadastrar vaga:', error);
     }
 }
+async function addListavaga(novaVaga) {
+    try {
+        
+        const response = await fetch(`http://localhost:8080/ListaVagas/insert`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(novaVaga), // Enviando os dados para o banco
+        });
 
+        if (!response.ok) {
+        throw new Error('Erro ao vadastrar vaga');
+        }
+
+        const vaga = await response.json();
+        console.log('Vaga cadastrada com sucesso:', vaga);
+
+        return vaga;
+    } catch (error) {
+        console.error('Erro ao cadastrar vaga:', error);
+    }
+}
+
+async function getVaga(id) {
+    try {
+        
+        const response = await fetch(`http://localhost:8080/vaga/vagas/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        
+        });
+
+        if (!response.ok) {
+        throw new Error('Erro ao consultar vaga');
+        }
+
+        const vaga = await response.json();
+
+        return vaga;
+    } catch (error) {
+        console.error('Erro ao cadastrar vaga:', error);
+    }
+}
+async function deletarListaVaga(id) {
+    
+    try {
+      // Requisição DELETE ao backend
+      const response = await fetch(`http://localhost:8080/ListaVagas/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao deletar vaga no servidor');
+      }
+
+    } catch (error) {
+      console.error('Erro ao deletar vaga:', error);
+      alert('Não foi possível deletar a vaga. Tente novamente.');
+    }
+}
 async function deletarVaga(index) {
     const vaga = this.listaVagas[index];
 
@@ -215,7 +296,7 @@ async function deletarVaga(index) {
     const confirmar = confirm(`Deseja deletar a vaga: ${vaga.tipoVaga}?`);
     if (!confirmar) return;
 
-    try {
+    try {/*
       // Requisição DELETE ao backend
       const response = await fetch(`http://localhost:8080/vaga/${vaga.id}`, {
         method: 'DELETE'
@@ -223,6 +304,34 @@ async function deletarVaga(index) {
 
       if (!response.ok) {
         throw new Error('Erro ao deletar vaga no servidor');
+      }*/
+
+      let quantidadeVaga = 0
+      while(quantidadeVaga < vaga.quantidade){
+         let vagas = [await getVaga(vaga.id)];
+            
+            listaTipos.value = vagas.flatMap((vagas) =>
+            Array.from({ length: vagas.quantidade  }, () => vagas));
+
+            //.map para eliminar o id que está se repetindo da lista de tipos.
+            const propriedadeParaRemover = 'id'
+            listaAtualizada.value = listaTipos.value //.map(({ [propriedadeParaRemover]: _, ...resto }) => resto);
+
+            
+                for (const v of listaAtualizada.value){
+                    let listaVagas =  await fetch("http://localhost:8080/ListaVagas/ListaVagas");
+                    let lista = await listaVagas.json();
+
+                    for (const i of lista){
+                        if (i.cadastroVagaID === v.id){
+                            deletarListaVaga(i.id);
+                        }
+                    }
+                    
+                    console.log('deletando dados')
+                }
+      
+        quantidadeVaga ++;
       }
 
       // Remove da lista local após sucesso
@@ -235,7 +344,6 @@ async function deletarVaga(index) {
 
     return{
         cadastroVaga,
-        daoTipoVaga,
         salvarQuantidade,
         vagaSelecionada,
         onBeforeMount,
@@ -243,7 +351,6 @@ async function deletarVaga(index) {
         limpaDadosVaga,
         vagaQuantidade,
         vagaConfig,
-        daoDados,
         listaTipoVagaAgr,
         listaDaoDadosVagas,
         deletarVaga
