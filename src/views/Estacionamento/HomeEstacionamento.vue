@@ -66,6 +66,10 @@ export default {
         })
 
     onBeforeMount(async() => {
+        //alimenta a lista com todas as vagas disponiveis no banco
+        let lista = await fetch("http://localhost:8080/ListaVagas/ListaVagas");
+        let listaVagas = await lista.json();
+
         //lista para saber a quantidade de veiculos estacionados.
         listVeiEstacionados.value  = await daoEstaciona.getAll();
         quantidadeVeiEstacionados.value = listVeiEstacionados.value.length;
@@ -73,7 +77,7 @@ export default {
        
 
 
-        listaTipos.value = await daoDados.getAll();
+        listaTipos.value = listaVagas;
         //for para converter getTime para hora.
         for (const h of listaTipos.value){
             if(h.HoraEntrada!== undefined){
@@ -186,8 +190,8 @@ export default {
       return numero / 100;
     }
 
-
     onMounted (async()=> {
+        
         let lv = await daoVeiculo.getAll();
         listaVeiculo.value = lv;
         //pega o ID do select para inserir os option
@@ -231,6 +235,7 @@ export default {
         telaEntrada.value = true;
         tv.value = dados;
         isModalOpen.value = true;
+        console.log(dados)
         
     }
 
