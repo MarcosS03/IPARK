@@ -1,6 +1,5 @@
 <script>
 import HeaderGeral from '@/components/HeaderGeral.vue';
-import DAOService from '@/service/DAOService';
 import { onBeforeMount, ref } from 'vue';
 
 export default {
@@ -9,15 +8,13 @@ export default {
 
   },
     setup() {
-        const daoVeiculos = new DAOService('veiculos');
-        const daoFabricantes = new DAOService('fabricantes');
-        const daoModelos = new DAOService('modelosVeiculos');
+    
 
         const veiculo = ref({
             placa: '',
             chassi: '',
             renavam: '',
-            categoria: '', // <--- NOVA PROPRIEDADE
+            categoria: '',
             modelo: '',
             fabricante: '',
             anoFabricacao: '',
@@ -25,6 +22,7 @@ export default {
             cor: '',
             potencia: '',
             capacidade: '',
+            estacionamentoID:1
         });
 
         const fabricantesOptions = ref([]);
@@ -33,7 +31,6 @@ export default {
             'Vermelho', 'Preto', 'Branco', 'Prata', 'Azul', 'Amarelo', 'Verde', 'Cinza', 'Dourado', 'Roxo'
         ]);
 
-        // <--- NOVA DEFINIÇÃO DE OPÇÕES DE CATEGORIA
         const categoriasOptions = ref([
             'Automóvel',
             'Motocicleta',
@@ -54,6 +51,7 @@ export default {
         };
 
         onBeforeMount(async () => {
+    
             try {
                 let promessaFabricante = await fetch("http://localhost:8080/fabricanteVeiculos/fabricantes");
                 fabricantesOptions.value = await promessaFabricante.json();
@@ -65,6 +63,7 @@ export default {
                 console.error("Erro ao carregar fabricantes:", error);
                 displayMessage('Não foi possível carregar os fabricantes.', 'error');
             }
+            
         });
 
         const onFabricanteChange = async () => {
@@ -76,8 +75,6 @@ export default {
                 try {
                     const marca = fabricantesOptions.value.find(f => f.fabricante === veiculo.value.fabricante);
                     if (marca) {
-                        //const promessaModelos = await fetch("http://localhost:8080/modeloVeiculos/modelos");
-                        //const todosModelos = await promessaModelos.json();
                         modelosOptions.value = marca.listaVeiculos
                         if (modelosOptions.value.length === 0) {
                             displayMessage(`Nenhum modelo encontrado para ${veiculo.value.fabricante}.`, 'error');
@@ -90,20 +87,32 @@ export default {
             }
         };
 
-        const cadastraVeiculo = async () => {
+        const cadastrarVeiculo = async () => {
+
             // Validações básicas adicionando a nova categoria
             if (!veiculo.value.placa || !veiculo.value.fabricante || !veiculo.value.modelo || !veiculo.value.categoria) {
                 displayMessage('Por favor, preencha todos os campos obrigatórios (Placa, Categoria, Fabricante, Modelo).', 'error');
                 return;
             }
 
-            try {
-                await daoVeiculos.insert(veiculo.value);
-                displayMessage('Veículo cadastrado com sucesso!', 'success');
-                limpaDadosVeiculo();
+           try {
+            const response = await fetch(`http://localhost:8080/veiculos/insert`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(veiculo.value),
+            });
+
+            if (!response.ok) {
+            throw new Error('Erro ao cadastrar veiculo');
+            }
+            displayMessage('Veículo cadastrado com sucesso!');
+            limpaDadosVeiculo();
+            return await response.json();
             } catch (error) {
-                console.error("Erro ao cadastrar veículo:", error);
-                displayMessage('Erro ao cadastrar veículo. Verifique os dados e tente novamente.', 'error');
+                console.error('Erro ao cadastrar veiculo:', error);
+                throw error;
             }
         };
 
@@ -126,7 +135,7 @@ export default {
 
         return {
             veiculo,
-            cadastraVeiculo,
+            cadastrarVeiculo,
             fabricantesOptions,
             modelosOptions,
             coresOptions,
@@ -156,7 +165,7 @@ export default {
                 <p>Preencha os detalhes para adicionar um veículo ao sistema.</p>
             </header>
 
-            <form @submit.prevent="cadastraVeiculo" class="vehicle-form">
+            <form @submit.prevent="cadastrarVeiculo" class="vehicle-form">
                 <section class="form-section">
                     <h3>Dados Básicos</h3>
                     <div class="form-group">

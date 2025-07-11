@@ -13,10 +13,6 @@ export default {
   
   setup() {
     const isModalOpen = ref(false)
-    const  daoVeiculo = new DAOService('veiculos');
-    const daoEstaciona = new DAOService('veiculoEstacionado');
-    const daoDados = new DAOService('daoDadosVagas');
-    const daoveiculoLiberado = new DAOService('daoveiculoLiberado');
 
     const listaVagas = ref([]);
 
@@ -62,7 +58,10 @@ export default {
             HoraSaida: '',
             statuVaga: '',
             valorPago: '',
-            tempoPermanecia: ''
+            tempoPermanecia: '',
+            veiculoID: null,
+            listaVagasID: null,
+            estacionamentoID: 1
         })
 
     onBeforeMount(async() => {
@@ -71,13 +70,12 @@ export default {
         let listaVagas = await lista.json();
 
         //lista para saber a quantidade de veiculos estacionados.
-        listVeiEstacionados.value  = await daoEstaciona.getAll();
+        //listVeiEstacionados.value  = await daoEstaciona.getAll();
         quantidadeVeiEstacionados.value = listVeiEstacionados.value.length;
         
        
-
-
         listaTipos.value = listaVagas;
+        console.log(listaTipos.value)
         //for para converter getTime para hora.
         for (const h of listaTipos.value){
             if(h.HoraEntrada!== undefined){
@@ -94,13 +92,11 @@ export default {
                 h.HoraEntrada = formatador.format(horaFormatadaEntrada);
             }
         }
-
-        
         //quantidade de vagas livres
         quantidadeVagaLivre.value = listaTipos.value.length - quantidadeVeiEstacionados.value;
 
         
-        listVeiculoLiberados.value = await daoveiculoLiberado.getAll();
+        //listVeiculoLiberados.value = await daoveiculoLiberado.getAll();
         
         function converteMes (data){
         
@@ -192,13 +188,13 @@ export default {
 
     onMounted (async()=> {
         
-        let lv = await daoVeiculo.getAll();
-        listaVeiculo.value = lv;
+        let lv = await fetch("http://localhost:8080/veiculos/veiculos");
+        listaVeiculo.value = await lv.json();
         //pega o ID do select para inserir os option
         let veiculo = document.getElementById('listaVeiculos');
 
         //interação para inserir os tipos de vagas no option, e criar o option do select
-        lv.forEach(function(veiculos){
+        listaVeiculo.value.forEach(function(veiculos){
             let p = veiculos.placa;
             let m = veiculos.modelo;
             let item = document.createElement('Option');
@@ -382,13 +378,6 @@ export default {
     const finalizarPagamento = async (dados) =>{
         
         let veiEstacionado = listVeiEstacionados.value.find(v => v.tipoVaga.id === dados.id)
-        
-        /*veiEstacionado.HoraEntrada = dadosVeiEst.value.HoraEntrada;
-        veiEstacionado.HoraSaida = dadosVeiEst.value.HoraSaida;
-        veiEstacionado.statuVaga = dadosVeiEst.value.statuVaga;
-        veiEstacionado.tempoPermanecia = dadosVeiEst.value.tempoPermanecia;
-        veiEstacionado.valorPago =  dadosVeiEst.value.valorPago;
-        veiEstacionado.dataSaida = dataAtual;*/
 
         dadosVeiEst.value.dataSaida = dataAtual
         
@@ -404,38 +393,81 @@ export default {
     //pegar o veiculo selecionado, e salva na coleção veiculoestacionado.
     //da um update no dados da vaga.
     const EstacionarVeiculo = async() =>{
-        //variavel pega pega a string a tranforma em uma lista, onde o primeiro elemtno é a placa
+        //variavel pega pega a string e tranforma em uma lista, onde o primeiro elemtno é a placa
         let vs = veiculoSelecionado.value.split(" ");
         let veiculo = listaVeiculo.value.find(v => v.placa.includes(vs[0])) //primeiro elemento
 
-        dadosVeiEst.value.tipoVaga = tv.value;
-        dadosVeiEst.value.placa = veiculo.placa;
-        dadosVeiEst.value.chassi = veiculo.chassi;
-        dadosVeiEst.value.renavam = veiculo.renavam;
-        dadosVeiEst.value.modelo = veiculo.modelo;
-        dadosVeiEst.value.fabricante = veiculo.fabricante;
-        dadosVeiEst.value.anoFabricacao = veiculo.anoFabricacao;
-        dadosVeiEst.value.anoModelo = veiculo.anoModelo;
-        dadosVeiEst.value.cor = veiculo.cor;
-        dadosVeiEst.value.potencia = veiculo.potencia;
-        dadosVeiEst.value.capacidade = veiculo.capacidade;
+        dadosVeiEst.value.veiculoID = veiculo;
+        dadosVeiEst.value.estacionamentoID = 1;
+        dadosVeiEst.value.listaVagasID = tv.value.id
         dadosVeiEst.value.dataEntrada = dataAtual;
         dadosVeiEst.value.HoraEntrada = hora;
-        dadosVeiEst.value.HoraSaida = '';
-        dadosVeiEst.value.statuVaga = 'ocupado';
-        dadosVeiEst.value.valorPago = '';
-        dadosVeiEst.value.tempoPermanecia = '';
+        console.log(dadosVeiEst.value)
+
+     
+        tv.value.statuVaga = "ocupado";
+        let veiculoEstacionado = await insertVaga(dadosVeiEst.value);
 
         // tv o tela de entrada veiculo, pega o veiculo que vai entrar no estacionamento
-        await daoDados.update(tv.value.id, dadosVeiEst.value)
-        
-        await daoEstaciona.insert(dadosVeiEst.value);
+        tv.value.veiculoEstacionadoID = veiculoEstacionado.id;
+  
+        tv.value.estacionamentoID = tv.value.estacionamento.id;
+        console.log(tv.value);
+
+        //update para marca a vaga como ocupada
+        await updateVaga(tv.value.id, tv.value);
+
         alert('Veiculo estacionado');
         await sairTela();
         location.reload();
     }
 
-   
+    async function insertVaga (vaga){
+        try {
+          const response = await fetch(`http://localhost:8080/veiculoEstacionado/insert`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(vaga), // Enviando os dados atualizados
+          });
+
+          if (!response.ok) {
+          throw new Error('Erro ao estacionar veiculo na vaga');
+          }
+
+          const v = await response.json();
+          console.log('Vaga atualizada com sucesso:', v);
+          return v;
+      } catch (error) {
+          console.error('Erro ao atualizar vaga (catch block):', error);
+        throw error;
+      }
+    }
+
+   async function updateVaga (id,vagaAtualizada){
+    console.log(id)
+    console.log(vagaAtualizada)
+        try {
+          const response = await fetch(`http://localhost:8080/ListaVagas/updateVaga/${id}`,{
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(vagaAtualizada), // Enviando os dados atualizados
+          });
+
+          if (!response.ok) {
+          throw new Error('Erro ao atualizar vaga');
+          }
+
+          const vaga = await response.json();
+          console.log('Vaga atualizada com sucesso:', vaga);
+          return vaga;
+      } catch (error) {
+          console.error('Erro ao atualizar vaga:', error);
+      }
+    }
 
     return {
         listaVagas,
@@ -452,8 +484,6 @@ export default {
         formatDate,
         dataAtual,
         hora,
-        daoEstaciona,
-        daoDados,
         saidaVeiculo,
         telaSaida,
         dadosSaida,
@@ -468,7 +498,6 @@ export default {
         formaPagamento,
         VeiculoLiberado,
         verificarFormaPagamento,
-        daoveiculoLiberado,
         converterParaNumero,
         listVeiculoLiberados,
         recDinheiroDia, recDebitoDia, recCreditoDia, recPixDia, recValorTotalMes, ticketMedio, quantidadeVeiEstacionados,quantidadeVagaLivre
@@ -491,7 +520,7 @@ export default {
         <div class="valoresRecebidos">
             <p>{{ recDinheiroDia }} dinheiro</p>
             <p>{{recPixDia}} PIX</p>
-            <p>R$ 00,00 APP</p>
+            <p>R$ PIX APP</p>
             <p>{{recCreditoDia}} cartão de crédito</p>
             <p>{{recDebitoDia}} cartão de débito</p>
         </div>
@@ -569,17 +598,17 @@ export default {
       </div>
       <div v-if="dados.statuVaga === 'ocupado'" :class="{ 'inactive': isModalOpen }">
         <button type="button" class="botaoVaga" @click="saidaVeiculo(dados)">
-            <p class="tipoVaga">{{dados.tipoVaga.tipoVaga}}</p>
+            <p class="tipoVaga">{{dados.tipoVaga}}</p>
             <img src="/src/assets/img/icons8-estacionamentovagaocupada-50.png" width="40" height="40" alt="">
-            <p class="placaVagaOcupada">{{dados.placa}}</p>
-            <p class="horaEntrada">Entrada: {{dados.HoraEntrada}}</p>
+            <p class="placaVagaOcupada">{{dados.veiculoEstacionado.veiculo.placa}}</p>
+            <p class="horaEntrada">Entrada: {{dados.veiculoEstacionado.horaEntrada}}</p>
         </button>
       </div>
     </div>
 
     <div v-show="telaEntrada === true" class="modalEstacionamento">
         <div class="veiculoCadastrado">
-            <label for="">Lista de veiculos: </label>
+            <label for="">Lista de veiculo:</label>
             <select id="listaVeiculos" size="6" v-model="veiculoSelecionado">
                 <option selected disabled class="option">Seleciona a placa</option>    
             </select>

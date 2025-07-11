@@ -79,7 +79,7 @@ export default {
     const lista_Vagas = async () => {
       try {
         let vagas = await fetch("http://localhost:8080/vaga/vagas");
-        console.log(vagas)
+    
         if (!vagas.ok) {
           throw new Error("Erro ao buscar vagas!");
         }
